@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+* {
+  font-family: Montserrat, serif;
+  color: #0A2E52;
+}
+
+body, input, img {
+  background-color: #E5E5E5;
+}
+
+button:focus {
+  outline: none;
+}
+
+button, a{
+  transition: .6s;
+  cursor: pointer;
+}

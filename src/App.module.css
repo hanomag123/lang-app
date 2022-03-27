@@ -1,0 +1,42 @@
+h3 {
+    font-weight: bold;
+}
+
+.progressBar {
+    position: absolute;
+    height: 12px;
+    border-radius: 0 20px 20px 0;
+    width: 0;
+    transition: .6s;
+}
+
+.progressBar__container {
+    position: relative;
+    height: 12px;
+    background-color: #E9EBF1;
+
+}
+
+.btn__back, .btn__next {
+    border-radius: 50px;
+    height: 40px;
+    width: 90px;
+    border: none;
+}
+
+.game__nav {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    padding: 30px;
+    max-width: 1020px;
+    margin: 0 auto;
+    border: 1px solid #DDDDDD;
+    border-radius: 30px;
+}
+
+@media(max-width: 1040px) {
+    .game__container {
+        margin: 0 30px;
+    }
+}
