@@ -1,5 +1,5 @@
 import React from 'react'
-import {ReactComponent as Logo} from '../../components/assets/img/logo.svg'
+import {ReactComponent as Logo} from '../../components/assets/img/Icon.svg'
 import Nav from '../Nav/Nav'
 import * as styles from './header.module.css'
 
