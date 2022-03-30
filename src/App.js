@@ -1,14 +1,17 @@
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard';
-import Header from './components/Header/Header';
+import {Dashboard} from './components/Dashboard/Dashboard';
+import {Header} from './components/Header/Header';
+import { Library } from './components/Library/Library';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
-function App() {
+export function App() {
   return (
-    <div>
+    <BrowserRouter>
       <Header />
-      <Dashboard />
-    </div>
+      <Routes>
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/library' element={<Library />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
