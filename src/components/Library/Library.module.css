@@ -1,146 +1,128 @@
-.dashboardContainer {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    color: #0A2E52;
-    margin: 0 auto;
-    column-gap: 60px;
-    row-gap: 60px;
-    padding: 60px;
-    box-sizing: border-box;
-}
-
-
-.gameBlock {
-    border: 1px solid #DDDDDD;
-    box-sizing: border-box;
-    border-radius: 30px;
-    grid-row: 1/3;
-    max-height: calc(100vh - 180px);
-
-    display: grid;
-    justify-content: center;
-    grid-template-rows: 1fr 1fr 3fr;
-    align-items: center;
-    justify-items: center;
-}
-
-.btnPlay {
-    box-shadow: 2px 2px 5px rgba(10, 46, 82, 0.16), -8px -8px 40px rgba(255, 255, 255, 0.56), 8px 8px 15px rgba(0, 0, 0, 0.17);
-    border-radius: 50%;
-    transition: 0.6s;
-    cursor: pointer;
-}
-
-.btnPlay:hover, .btnRandom:hover {
-    opacity: .6;
-}
-
-.pointsBlock {
-    grid-column: 2/3;
-    text-align: right;
-    padding: 30px;
-}
-
-.gameBlock p {
+.libraryBlock > span{
     text-align: center;
     font-size: calc(12px + (24 - 16) * (100vw - 400px) / (800 - 400));
 }
-
-.pointsBlock, .levelBlock {
-    background: #ECEDF2;
-    border-radius: 30px;
-    box-shadow: 2px 2px 4px rgba(10, 46, 82, 0.12), -6px -6px 40px rgba(255, 255, 255, 0.63), 4px 4px 15px rgba(10, 46, 82, 0.11), inset 4px 4px 30px rgba(10, 46, 82, 0.11), inset -4px -4px 40px #FFFFFF;
+.libraryBlock {
+    display: grid;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
-.btnRandom:focus {
+section {
+    padding: 60px;
+}
+
+.addWordBlock {
+    display: grid;
+    grid-template-columns: 3fr auto;
+    column-gap: 30px;
+    justify-items: center;
+    margin: 60px;
+}
+
+.addWordBlock button {
+    padding: 0;
+    border: none;
+    background: none;
+    transition: .6s;
+}
+
+.addWordBlock button:focus {
+    outline: none;
+}
+.addWordBlock button:hover {
+    opacity: .6;
+}
+.addWordBlock input {
+    box-shadow: inset -4px -4px 4px rgba(255, 255, 255, 0.18), inset 2px 2px 4px rgba(0, 0, 0, 0.24), inset -8px -8px 15px rgba(255, 255, 255, 0.02), inset 8px 8px 15px rgba(10, 46, 82, 0.21);
+    border-radius: 15px;
+    border: none;
+    width: 100%;
+    padding: 6px 12px;
+}
+
+.addWordBlock input:focus {
     outline: none;
 }
 
-.btnRandom {
-    background: #ECEDF2;
+.addWordBlock img {
+    max-width: 42px;
     box-shadow: 2px 2px 5px rgba(10, 46, 82, 0.16), -8px -8px 40px rgba(255, 255, 255, 0.56), 8px 8px 15px rgba(0, 0, 0, 0.17);
-    border-radius: 50px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: calc(12px + (24 - 16) * (80vw - 400px) / (800 - 400));
-    padding: 18px 72px;
-    text-align: center;
-    text-transform: uppercase;
-    border: none;
+    border-radius: 50%;
+}
+.addWordBlock img:hover {
+    opacity: .6;
     cursor: pointer;
-    transition: 0.6s;
+}
+.addWordBlock img.close {
 
-    color: #0A2E52;
 }
 
-.levelBlock h3, .pointsBlock h3 {
-    text-align: right;
-    margin: 0;
-    padding-top: 12px;
+.wordsTable > ul:not(:first-child) > li{
+    z-index: 1;
+    padding: 12px 12%;
 }
 
-.levelBlock span {
-    text-align: right;
+.settings button:hover {
+    opacity: .6;
+    background-color: #e7e7e7;
+}
+.settings button {
+    cursor: pointer;
+    transition: .6s;
+    border-radius: 6px;
+    padding: 6px;
+}
+.settings button:focus {
+    outline: none;
 }
 
-.levelBlock p {
-    font-style: normal;
-    font-weight: 300;
-    font-size: calc(12px + (24 - 16) * (100vw - 400px) / (800 - 400));
-    text-align: left;
+.settings button, .settings img{
+    border: none;
+    background-color: transparent;
 }
-
-.levelBlock {
-    position: relative;
-    padding: 30px 30px 90px 30px;
+.settings img {
+    width: 60%;
+}
+.settings {
+    z-index: 0;
+    position: absolute;
+    background-color: #F8F8FB;
+    justify-content: end;
     display: grid;
-    align-content: start;
+    opacity: 0;
+    width: calc(100% + 60px);
+    left: -30px;
+    grid-auto-flow: column;
+    column-gap: 12px;
+    box-sizing: border-box;
+    top: 0;
+    padding: 6px 12px;
+    transition: .6s;
 }
 
-.levelBlock::after {
-    content: '';
-    position: absolute;
-    height: 100%;
+
+.wordsTable > ul:not(:first-child):hover .settings{
+    opacity: 1;
+}
+
+.wordsTable h3{
+    text-align: center;
     width: 100%;
-    left: 24px;
-    bottom: -22px;
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    background-image: url("../../assets/img/level-background.svg");
 }
 
-.levelBackground {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    bottom: 0;
-    left: 0;
+.wordsTable > ul {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: start;
+    column-gap: 30px;
+    list-style-type: none;
 }
 
-@media (max-width: 1120px) {
-    .levelBackground::after {
-        left: 5.6%;
-        bottom: -4.6%;
-        background-size: contain;
-    }
-}
-
-@media (max-width: 992px) {
-    .dashboardContainer {
-        column-gap: 12px;
-        row-gap: 12px;
-        padding: 18px;
-    }
-
-    .gameBlock {
-        min-height: 70vh;
-    }
-
-    .levelBlock {
-        min-height: unset;
-    }
-
-    .levelBlock, .pointsBlock {
-        padding: 24px;
-    }
+.wordsTable {
+    box-shadow: 2px 2px 4px rgba(10, 46, 82, 0.12), -6px -6px 40px rgba(255, 255, 255, 0.63), 4px 4px 15px rgba(10, 46, 82, 0.11), inset 4px 4px 30px rgba(10, 46, 82, 0.11), inset -4px -4px 40px #FFFFFF;
+    border-radius: 30px;
+    padding: 30px;
+    box-sizing: border-box;
 }
