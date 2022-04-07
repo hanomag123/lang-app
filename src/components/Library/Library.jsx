@@ -1,31 +1,31 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './Library.module.css'
 import addBtn from './../../assets/img/add.svg'
 import deleteBtn from './../../assets/img/delete.svg'
 
 export const Library = ({library, setLibrary}) => {
-    const inputValue = useRef();
+    const [input, setInput] = useState('')
     const deleteWord = (id) => {
-        const updateLibrary = library.filter((word, index) => index !== id);
+        const updateLibrary = library.filter((_, index) => index !== id);
         setLibrary(updateLibrary)
         localStorage.setItem('library', JSON.stringify(updateLibrary));
     }
 
     const addNewWord = async (event) => {
         event.preventDefault();
-        const response = await fetch(`http://tmp.myitschool.org/API/translate/?source=ru&target=en&word=${inputValue.current.value}`);
+        const response = await fetch(`http://tmp.myitschool.org/API/translate/?source=ru&target=en&word=${input}`);
         const translation = await response.json();
         const updateLibrary = [...library, {word: translation.word, translate: translation.translate, learn: 0}];
         setLibrary(updateLibrary);
         localStorage.setItem('library', JSON.stringify(updateLibrary));
-        inputValue.current.value = '';
+        setInput('');
     }
     return (
         <section className={styles.libraryBlock}>
             <span>Add new <b>Word</b></span>
 
             <form onSubmit={addNewWord} className={styles.addWordBlock}>
-                <input ref={inputValue} type='text' />
+                <input onChange={e => setInput(e.target.value)} value={input} type='text' />
 
                 <button>
                     <img src={addBtn} alt='addButton'/>
