@@ -1,12 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
+import { Store } from "../../../Context";
 import { NavLink } from "react-router-dom";
 import classes from "./AppGames.module.css"
 import styles from '../../../App.module.css'
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 
-export const WriteIt = ({playWords, wordIndex, setWordIndex, library, correctWords, setCorrectWords, errorWords, setErrorWords, points, speak}) => {
+export const WriteIt = React.memo(({playWords, wordIndex, setWordIndex, library, points, speak}) => {
     const input = useRef()
-    const [randomWords, setRandomWords] = useState(playWords.sort(() => Math.random() - 0.5))
+    const [randomWords, setRandomWords] = useState(playWords.sort(() => Math.random() - 0.5));
+
+    const {correctWords, errorWords, setCorrectWords, setErrorWords} = useContext(Store);
+
+    console.log(correctWords)
 
     const checkWord = (event) => {
         event.preventDefault();
@@ -42,4 +47,4 @@ export const WriteIt = ({playWords, wordIndex, setWordIndex, library, correctWor
             </section>
         </>
     );
-}
+});

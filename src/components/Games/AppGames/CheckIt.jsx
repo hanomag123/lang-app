@@ -1,18 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useContext } from "react";
+import { Store } from "../../../Context";
 import { NavLink } from "react-router-dom";
 import classes from "./AppGames.module.css"
 import styles from '../../../App.module.css'
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 
-export const CheckIt = ({playWords, wordIndex, setWordIndex, library, correctWords, setCorrectWords, errorWords, setErrorWords, points, speak}) => {
+export const CheckIt = React.memo(({playWords, wordIndex, setWordIndex, library, points, speak}) => {
     const [currentWords, setCurrentWords] = useState(['random', 'correct', 'random2']);
     const randomWords = useMemo(() => playWords.sort(() => Math.random() - 0.5), [])
-
+    const {correctWords, errorWords, setCorrectWords, setErrorWords} = useContext(Store);
     useEffect(() => {
         setCurrentWords([
-            randomWords[wordIndex].word, 
-            randomWords[(wordIndex + 1)%randomWords.length].word, 
-            randomWords[(wordIndex + 2)%randomWords.length].word
+            randomWords[wordIndex]?.word, 
+            randomWords[(wordIndex + 1)%randomWords.length]?.word, 
+            randomWords[(wordIndex + 2)%randomWords.length]?.word
         ].sort(() => Math.random() - 0.5))
     }, [correctWords])
 
@@ -42,10 +43,10 @@ export const CheckIt = ({playWords, wordIndex, setWordIndex, library, correctWor
                     <h3>{randomWords[wordIndex]?.translate}</h3>
                     <ul className={classes.btnContainer}>
                         {currentWords.map((word,index) => (
-                            <li className={classes.btnCheck} onClick={() => checkWord(word)}>{word}</li>
+                            <li key={index} className={classes.btnCheck} onClick={() => checkWord(word)}>{word}</li>
                         ))}
                     </ul>
             </section>
         </>
     );
-}
+});
