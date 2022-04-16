@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
 import styles from '../../App.module.css'
+import { Store } from "../../Context";
 
-export const Learn = ({library, wordIndex, speak, setWordIndex}) => {
-
+export const Learn = () => {
+    const {library, wordIndex, speak, setWordIndex} = useContext(Store)
     useEffect(() => {
         speak(library[wordIndex].translate)
     }, [wordIndex])

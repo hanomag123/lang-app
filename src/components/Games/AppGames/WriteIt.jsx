@@ -5,13 +5,10 @@ import classes from "./AppGames.module.css"
 import styles from '../../../App.module.css'
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 
-export const WriteIt = React.memo(({playWords, wordIndex, setWordIndex, library, points, speak}) => {
+export const WriteIt = React.memo(() => {
+    const {correctWords, errorWords, setCorrectWords, setErrorWords, playWords, wordIndex, setWordIndex, points, speak} = useContext(Store);
     const input = useRef()
     const [randomWords, setRandomWords] = useState(playWords.sort(() => Math.random() - 0.5));
-
-    const {correctWords, errorWords, setCorrectWords, setErrorWords} = useContext(Store);
-
-    console.log(correctWords)
 
     const checkWord = (event) => {
         event.preventDefault();
@@ -26,7 +23,7 @@ export const WriteIt = React.memo(({playWords, wordIndex, setWordIndex, library,
     }
     return (
         <>
-            <ProgressBar library={library} wordIndex={wordIndex}/>
+            <ProgressBar/>
             <nav className={styles.gameNav}>
                 <NavLink className={styles.btnBack} to='/games' />
                 <ul className={styles.results}>

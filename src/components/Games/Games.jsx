@@ -29,7 +29,7 @@ export const Games = ({}) => {
     return (
         <section className={styles.gameContainer}>
             {GAMES.map((game, index) => (
-                <NavLink key={index} to={'/game/' + game.path}>
+                <NavLink key={index} to={'/games/' + game.path}>
                     <div className={styles.gameBlock}>
                         <div>
                             <h2>{game.name}</h2>

@@ -1,5 +1,4 @@
 import './App.css';
-import styles from './App.module.css'
 import {Dashboard} from './components/Dashboard/Dashboard';
 import {Header} from './components/Header/Header';
 import { Library } from './components/Library/Library';
@@ -9,23 +8,23 @@ import { Learn } from './components/Learn/Learn';
 import { Games } from './components/Games/Games';
 import { WriteIt } from './components/Games/AppGames/WriteIt';
 import {CheckIt} from './components/Games/AppGames/CheckIt'
-import { ProgressBar } from './components/ProgressBar/ProgressBar';
 import { Store } from './Context';
 import { useCookies } from 'react-cookie';
+import { games } from './components/Games';
 
 export function App() {
   const [library, setLibrary] = useState(JSON.parse(localStorage.getItem('library')) || []);
   const [wordIndex, setWordIndex] = useState(0);
-  const [playWords, setPlayWords] = useState(library.slice(-10));
   const [correctWords, setCorrectWords] = useState(0);
   const [errorWords, setErrorWords] = useState(0);
   const [cookie, setCookie] = useCookies(['points'])
   const [points, setPoints] = useState(+cookie.points || 0);
+  const playWords = library.slice(-10);
 
   useEffect(() => {
     if (correctWords) {
       setPoints(current => +current + 1)
-      setCookie('points', +points + 1)
+      setCookie('points', points)
     }
   }, [correctWords])
 
@@ -36,27 +35,14 @@ export function App() {
   }  
   return (
     <BrowserRouter>
-      <Store.Provider value={{correctWords, setCorrectWords, errorWords, setErrorWords}}>
+      <Store.Provider value={{correctWords, setCorrectWords, errorWords, setErrorWords, playWords, library, setLibrary, wordIndex, setWordIndex, points, speak}}>
         <Header />
         <Routes>
-          <Route path='/dashboard' element={<Dashboard points={points}/>} />
-          <Route path='/library' element={<Library library={library} setLibrary={setLibrary} />} />
+          <Route path='/' element={<Dashboard points={points}/>} />
+          <Route path='/library' element={<Library/>} />
           <Route path='/games' element={<Games />} />
-          <Route path='/game/write-it' element={<WriteIt library={library} 
-                                                          playWords={playWords} 
-                                                          wordIndex={wordIndex} 
-                                                          setWordIndex={setWordIndex}
-                                                          points={points}
-                                                          speak={speak}
-                                                          />} />
-          <Route path='/game/check-it' element={<CheckIt library={library} 
-                                                          playWords={playWords} 
-                                                          wordIndex={wordIndex} 
-                                                          setWordIndex={setWordIndex}
-                                                          points={points}
-                                                          speak={speak}
-                                                          />} />
-          <Route path='/learn' element={<Learn speak={speak} library={library} wordIndex={wordIndex} setWordIndex={setWordIndex}/>}/>
+          {games.map((game, index) => <Route key={index} path={`/games/${game.path}`} element={<game.component/>} />)}
+          <Route path='/learn' element={<Learn/>}/>
         </Routes>
       </Store.Provider>
     </BrowserRouter>

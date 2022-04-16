@@ -1,7 +1,9 @@
-import React from "react";
+import React ,{useContext} from "react";
 import styles from "../../App.module.css"
+import { Store } from "../../Context";
 
-export const ProgressBar = ({library, wordIndex}) => {
+export const ProgressBar = () => {
+    const {library, wordIndex} = useContext(Store)
     const progressBarWidth = {
         width: `${(100 / library.slice(-10).length) * (wordIndex + 1)}vw`
     }

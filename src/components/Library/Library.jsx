@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Library.module.css'
 import addBtn from './../../assets/img/add.svg'
 import deleteBtn from './../../assets/img/delete.svg'
+import { Store } from '../../Context'
 
-export const Library = ({library, setLibrary}) => {
+export const Library = () => {
+    const {library, setLibrary} = useContext(Store)
     const [input, setInput] = useState('')
     const deleteWord = (id) => {
         const updateLibrary = library.filter((_, index) => index !== id);

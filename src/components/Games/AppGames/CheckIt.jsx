@@ -5,10 +5,10 @@ import classes from "./AppGames.module.css"
 import styles from '../../../App.module.css'
 import { ProgressBar } from "../../ProgressBar/ProgressBar";
 
-export const CheckIt = React.memo(({playWords, wordIndex, setWordIndex, library, points, speak}) => {
+export const CheckIt = React.memo(() => {
+    const {correctWords, errorWords, setCorrectWords, setErrorWords, playWords, wordIndex, setWordIndex, library, points, speak} = useContext(Store);
     const [currentWords, setCurrentWords] = useState(['random', 'correct', 'random2']);
     const randomWords = useMemo(() => playWords.sort(() => Math.random() - 0.5), [])
-    const {correctWords, errorWords, setCorrectWords, setErrorWords} = useContext(Store);
     useEffect(() => {
         setCurrentWords([
             randomWords[wordIndex]?.word, 

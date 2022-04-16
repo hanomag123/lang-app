@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './Dashboard.module.css'
 import PlayButton from '../../assets/img/play.svg'
+import { Store } from '../../Context'
 
-export const Dashboard = ({points}) => {
+export const Dashboard = () => {
+    const {points} = useContext(Store)
     return (
         <section className={styles.dashboardContainer}>
             <div className={styles.gameBlock}>
